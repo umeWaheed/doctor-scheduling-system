@@ -11,7 +11,7 @@ RSpec.describe 'api/v1/appointments', type: :request do
       tags 'Doctors'
 
       response(200, 'successful') do
-        let(:doctor_id) { '1' }
+        let(:doctor_id) { create(:doctor).id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -36,11 +36,11 @@ RSpec.describe 'api/v1/appointments', type: :request do
         }
       }
 
-      let!(:appointment) do
-        create(:appointment)
-      end
-
       response(200, 'successful') do
+        let(:appointment) { create(:appointment) }
+        let(:id) { appointment.id }
+        let(:doctor_id) { appointment.doctor_id }
+
         after do |example|
           example.metadata[:response][:content] = {
             'application/json' => {
@@ -60,7 +60,7 @@ RSpec.describe 'api/v1/appointments', type: :request do
       tags 'Appointments'
 
       response(200, 'successful') do
-        let(:id) { '1' }
+        let(:id) { create(:appointment).id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -87,10 +87,8 @@ RSpec.describe 'api/v1/appointments', type: :request do
       }
 
       response(200, 'successful') do
-        let(:id) { '1' }
-        let!(:appointment) do
-          create(:appointment)
-        end
+        let(:appointment) { create(:appointment) }
+        let!(:id) { appointment.id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -107,7 +105,7 @@ RSpec.describe 'api/v1/appointments', type: :request do
       tags 'Appointments'
 
       response(200, 'successful') do
-        let(:id) { '1' }
+        let(:id) { create(:appointment).id }
 
         after do |example|
           example.metadata[:response][:content] = {

@@ -13,7 +13,7 @@ RSpec.describe 'api/v1/doctors/{id}/slots', type: :request do
       tags 'Doctors'
 
       response(200, 'successful') do
-        let(:doctor_id) { '1' }
+        let(:doctor_id) { create(:doctor).id }
 
         after do |example|
           example.metadata[:response][:content] = {

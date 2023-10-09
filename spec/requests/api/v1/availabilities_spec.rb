@@ -11,7 +11,7 @@ RSpec.describe 'api/v1/availabilities', type: :request do
       tags 'Doctors'
 
       response(200, 'successful') do
-        let(:doctor_id) { '1' }
+        let(:doctor_id) { create(:doctor).id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -39,7 +39,9 @@ RSpec.describe 'api/v1/availabilities', type: :request do
       }
 
       response(200, 'successful') do
-        let(:doctor_id) { '1' }
+        let(:availability) { create(:availability) }
+        let(:id) { availability.id }
+        let(:doctor_id) { availability.doctor_id }
 
         after do |example|
           example.metadata[:response][:content] = {
@@ -61,7 +63,9 @@ RSpec.describe 'api/v1/availabilities', type: :request do
       tags 'Doctors'
 
       response(200, 'successful') do
-        let(:id) { '1' }
+        let(:availability) { create(:availability) }
+        let(:id) { availability.id }
+        let(:doctor_id) { availability.doctor_id }
 
         after do |example|
           example.metadata[:response][:content] = {

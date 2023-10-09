@@ -44,6 +44,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rswag-specs'
   gem 'rswag'
+  gem 'factory_bot_rails'
 end
 
 group :development do
