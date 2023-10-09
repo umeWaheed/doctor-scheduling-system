@@ -1,0 +1,176 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/doctors/{doctor_id}/appointments":
+    parameters:
+    - name: doctor_id
+      in: path
+      description: Doctor id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: view a doctors's appointment
+      tags:
+      - Doctors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create appointment
+      tags:
+      - Appointments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - slot_id
+              - patient_name
+              properties:
+                slot_id:
+                  type: integer
+                patient_name:
+                  type: string
+  "/api/v1/appointments/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: Appointment id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show appointment
+      tags:
+      - Appointments
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update appointment
+      tags:
+      - Appointments
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - doctor_id
+              - slot_id
+              - patient_name
+              properties:
+                doctor_id:
+                  type: integer
+                slot_id:
+                  type: integer
+                patient_name:
+                  type: string
+    delete:
+      summary: delete appointment
+      tags:
+      - Appointments
+      responses:
+        '200':
+          description: successful
+  "/api/v1/doctors/{doctor_id}/availabilities":
+    parameters:
+    - name: doctor_id
+      in: path
+      description: Doctor id
+      required: true
+      schema:
+        type: string
+    get:
+      summary: show a doctor's working hours
+      tags:
+      - Doctors
+      responses:
+        '200':
+          description: successful
+    post:
+      summary: create a new availability
+      tags:
+      - Doctors
+      parameters: []
+      responses:
+        '200':
+          description: successful
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - start_time
+              - end_time
+              - duration
+              - date
+              properties:
+                start_time:
+                  type: string
+                end_time:
+                  type: string
+                duration:
+                  type: integer
+                date:
+                  type: string
+  "/api/v1/doctors/{doctor_id}/availabilities/{id}":
+    parameters:
+    - name: doctor_id
+      in: path
+      description: Doctor id
+      required: true
+      schema:
+        type: string
+    - name: id
+      in: path
+      description: Availability id
+      required: true
+      schema:
+        type: string
+    delete:
+      summary: delete availability
+      tags:
+      - Doctors
+      responses:
+        '200':
+          description: successful
+  "/api/v1/doctors/{doctor_id}/slots":
+    parameters:
+    - name: doctor_id
+      in: path
+      description: Doctor id
+      required: true
+      schema:
+        type: string
+    - name: status
+      in: query
+      enum:
+      - available
+      - booked
+      required: false
+      schema:
+        type: string
+    get:
+      summary: show doctors's availability
+      tags:
+      - Doctors
+      responses:
+        '200':
+          description: successful
+servers:
+- url: http://localhost:3000
